@@ -1,0 +1,180 @@
+# Gambas Form File 2.0
+
+{ Form Form
+  MoveScaled(0,0,114,47)
+  Text = ("")
+  { Button1 Button
+    MoveScaled(3,4,25,7)
+    Text = ("CONNECT")
+  }
+  { SerialPort1 #SerialPort
+    #X = 686
+    #Y = 161
+  }
+  { Timer1 #Timer
+    #X = 728
+    #Y = 161
+    Delay = 100
+  }
+  { Button2 Button
+    MoveScaled(95,4,17,3)
+    Text = ("START")
+  }
+  { Button3 Button
+    MoveScaled(95,8,17,3)
+    Text = ("STOP")
+  }
+  { TextBox1 TextBox
+    MoveScaled(34,4,24,3)
+    Text = ("30")
+  }
+  { Button4 Button
+    MoveScaled(60,4,34,3)
+    Text = ("CAS KROKU (20-100)")
+  }
+  { TextBox2 TextBox
+    MoveScaled(34,8,24,3)
+    Text = ("15")
+  }
+  { Button5 Button
+    MoveScaled(60,8,34,3)
+    Text = ("CAS CIKLU (1-200) ")
+  }
+  { Button6 Button
+    MoveScaled(95,12,17,2)
+    Text = ("ODBRZDIT")
+  }
+  { Button7 Button
+    MoveScaled(95,16,17,3)
+    Text = ("ZABRZDIT")
+  }
+  { CheckBox1 CheckBox
+    MoveScaled(70,17,14,3)
+    Text = ("MOTOR  A")
+  }
+  { CheckBox2 CheckBox
+    MoveScaled(70,21,14,3)
+    Text = ("MOTOR B")
+  }
+  { CheckBox3 CheckBox
+    MoveScaled(70,25,14,3)
+    Text = ("MOTOR C")
+  }
+  { Button8 Button
+    MoveScaled(60,16,8,3)
+    Text = ("<<<")
+  }
+  { Button9 Button
+    MoveScaled(85,16,9,2)
+    Text = (">>>")
+  }
+  { Button10 Button
+    MoveScaled(60,21,8,3)
+    Text = ("<<<")
+  }
+  { Button11 Button
+    MoveScaled(85,21,9,3)
+    Text = (">>>")
+  }
+  { Button12 Button
+    MoveScaled(60,26,8,3)
+    Text = ("<<<")
+  }
+  { Button13 Button
+    MoveScaled(85,26,9,3)
+    Text = (">>>")
+  }
+  { TextBox3 TextBox
+    MoveScaled(3,21,15,3)
+    Text = ("500")
+  }
+  { TextBox4 TextBox
+    MoveScaled(19,21,15,3)
+    Text = ("")
+  }
+  { CheckBox4 CheckBox
+    MoveScaled(43,22,14,2)
+    Text = ("STEP COUNT")
+  }
+  { Button14 Button
+    MoveScaled(3,26,55,3)
+    Text = ("OPEN + START SET")
+  }
+  { TextBox5 TextBox
+    MoveScaled(26,17,32,3)
+    Text = ("SET COMMANDS")
+    Alignment = Align.Center
+  }
+  { TextBox6 TextBox
+    MoveScaled(3,17,10,3)
+    Text = ("SET LINES")
+    Alignment = Align.Center
+  }
+  { TextBox7 TextBox
+    MoveScaled(14,17,11,3)
+    Text = ("SET STEPS")
+    Alignment = Align.Center
+  }
+  { TextBox8 TextBox
+    MoveScaled(3,13,55,3)
+    Text = (" -- SET INFO --")
+    Alignment = Align.Center
+  }
+  { TextBox9 TextBox
+    MoveScaled(3,30,11,3)
+    Text = ("TextBox9")
+  }
+  { TextBox10 TextBox
+    MoveScaled(15,30,11,3)
+    Text = ("TextBox10")
+  }
+  { TextBox11 TextBox
+    MoveScaled(27,30,11,3)
+    Text = ("TextBox11")
+  }
+  { TextBox12 TextBox
+    MoveScaled(39,30,11,3)
+    Text = ("TextBox12")
+  }
+  { Timer2 #Timer
+    #X = 728
+    #Y = 203
+    Delay = 30
+  }
+  { Button15 Button
+    MoveScaled(60,30,16,3)
+    Text = ("JOY START")
+  }
+  { Button16 Button
+    MoveScaled(78,30,16,3)
+    Text = ("JOY STOP")
+  }
+  { TextBox13 TextBox
+    MoveScaled(3,34,23,3)
+    Text = ("TextBox13")
+  }
+  { TextBox14 TextBox
+    MoveScaled(27,34,23,3)
+    Text = ("TextBox14")
+  }
+  { Button17 Button
+    MoveScaled(60,35,16,3)
+    Text = ("SERVO +")
+  }
+  { Button18 Button
+    MoveScaled(78,35,16,3)
+    Text = ("SERVO -")
+  }
+  { Button19 Button
+    MoveScaled(60,40,9,3)
+    Text = ("Servo 0")
+  }
+  { Button20 Button
+    MoveScaled(71,40,11,3)
+    Text = ("Servo 90")
+  }
+  { Button21 Button
+    MoveScaled(84,40,10,3)
+    Text = ("Servo 180")
+  }
+}

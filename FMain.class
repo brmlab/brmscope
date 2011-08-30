@@ -1,0 +1,392 @@
+' Gambas class file
+PUBLIC Motor_A_Dir AS Integer
+PUBLIC Motor_B_Dir AS Integer
+PUBLIC Motor_C_Dir AS Integer
+PUBLIC Step_IDX AS Integer
+PUBLIC Step_COUNT AS Boolean
+PUBLIC Step_WDT AS Boolean
+
+PUBLIC js AS Joystick
+
+PUBLIC joy_x AS Integer
+PUBLIC joy_y AS Integer
+PUBLIC joy_s AS Integer
+
+PUBLIC joy_bt_up AS Integer
+PUBLIC joy_bt_down AS Integer
+
+
+PUBLIC SUB _new()
+
+END
+
+PUBLIC SUB js_StickMove(num AS Integer, pos AS Integer)
+  TextBox9.Text = num
+  TextBox10.Text = pos
+
+IF num = 0 THEN joy_x = pos
+IF num = 1 THEN joy_y = pos
+
+  
+END
+
+PUBLIC SUB Form_Open()
+
+Motor_A_Dir = 0
+Motor_B_Dir = 0
+Motor_C_Dir = 0
+
+Button8.Enabled = FALSE
+Button10.Enabled = FALSE
+Button12.Enabled = FALSE
+
+Step_IDX = 0
+Step_COUNT = FALSE
+Step_WDT = FALSE
+  js = NEW Joystick("/dev/input/js0") AS "js"
+END
+
+PUBLIC SUB Button1_Click()
+
+ SerialPort1.PortName = "/dev/ttyUSB0" 
+SerialPort1.Speed = 115200
+SerialPort1.FlowControl = FALSE
+SerialPort1.Open
+
+END
+
+
+PUBLIC SUB js_ButtonPress(num AS Integer)
+  
+  ' check the corresponding checkbox
+  IF num = 2 THEN joy_bt_up = 1
+  IF num = 3 THEN joy_bt_down = 1
+  
+END
+
+PUBLIC SUB js_ButtonRelease(num AS Integer)
+  
+  ' uncheck the corresponding checkbox
+  IF num = 2 THEN joy_bt_up = 0
+  IF num = 3 THEN joy_bt_down = 0
+  
+END
+
+
+PUBLIC SUB Button2_Click()
+
+
+
+  Timer1.Enabled = TRUE
+
+END
+
+PUBLIC SUB Button3_Click()
+WRITE #SerialPort1, Chr$(TextBox1.Text)
+Timer1.Delay = TextBox2.Text
+  Timer1.Enabled = FALSE
+ WRITE #SerialPort1, Chr$(110)
+END
+
+PUBLIC SUB Timer1_Timer()
+
+IF CheckBox4.Value = TRUE THEN
+ Step_IDX = Step_IDX + 1
+ELSE 
+Step_IDX = 0
+ENDIF 
+
+
+
+IF CheckBox1.Value = TRUE THEN 
+IF Motor_A_Dir = 0 THEN WRITE #SerialPort1, Chr$(4)
+IF Motor_A_Dir = 1 THEN WRITE #SerialPort1, Chr$(5)
+ENDIF 
+
+IF CheckBox2.Value = TRUE THEN 
+IF Motor_B_Dir = 0 THEN WRITE #SerialPort1, Chr$(6)
+IF Motor_B_Dir = 1 THEN WRITE #SerialPort1, Chr$(7)
+ENDIF 
+
+IF CheckBox3.Value = TRUE THEN 
+IF Motor_C_Dir = 0 THEN WRITE #SerialPort1, Chr$(8)
+IF Motor_C_Dir = 1 THEN WRITE #SerialPort1, Chr$(9)
+ENDIF 
+
+IF Step_IDX > 0 AND Step_IDX = TextBox3.Text THEN
+Timer1.Enabled = FALSE
+Step_IDX = 0
+CheckBox4.Value = FALSE
+Step_WDT = FALSE
+ WRITE #SerialPort1, Chr$(110)
+ENDIF 
+
+TextBox4.Text = Step_IDX
+
+END
+
+PUBLIC SUB Button4_Click()
+
+WRITE #SerialPort1, Chr$(TextBox1.Text)
+
+END
+
+PUBLIC SUB Button5_Click()
+
+  Timer1.Delay = TextBox2.Text
+
+END
+
+PUBLIC SUB Button6_Click()
+
+  WRITE #SerialPort1, Chr$(110)
+
+END
+
+PUBLIC SUB Button7_Click()
+
+  WRITE #SerialPort1, Chr$(111)
+
+
+END
+
+PUBLIC SUB Button9_Click()
+
+  Button9.Enabled = FALSE
+  Button8.Enabled = TRUE
+  Motor_A_Dir = 1
+
+END
+
+PUBLIC SUB Button8_Click()
+
+  Button9.Enabled = TRUE
+  Button8.Enabled = FALSE
+  Motor_A_Dir = 0
+
+END
+
+PUBLIC SUB Button11_Click()
+
+    Button11.Enabled = FALSE
+  Button10.Enabled = TRUE
+  Motor_B_Dir = 1
+
+
+END
+
+PUBLIC SUB Button13_Click()
+
+    Button13.Enabled = FALSE
+  Button12.Enabled = TRUE
+  Motor_C_Dir = 1
+
+
+END
+
+PUBLIC SUB Button10_Click()
+
+    Button11.Enabled = TRUE
+  Button10.Enabled = FALSE
+  Motor_B_Dir = 0
+
+
+END
+
+PUBLIC SUB Button12_Click()
+
+    Button13.Enabled = TRUE
+  Button12.Enabled = FALSE
+  Motor_C_Dir = 0
+
+
+END
+
+PUBLIC SUB Button14_Click()
+   DIM linc AS Integer
+   DIM lin AS String
+
+  DIM arr_strings AS String[]
+
+arr_strings = Split(File.LOAD("/home/tomsuch/set-1.cnc"), "\n")
+
+FOR EACH lin IN arr_strings
+linc = linc + 1
+
+
+
+TextBox6.Text = linc
+'            lin
+TextBox5.Text = lin
+
+
+IF Mid(lin, 1, 1) = "*" THEN 
+TextBox8.Text = Mid(lin, 2, 40)
+ELSE 
+
+IF lin <> "" THEN
+
+TextBox1.Text = Val((Mid(lin, 7, 3)))
+TextBox2.Text = Val((Mid(lin, 11, 3)))
+TextBox7.text = Val((Mid(lin, 1, 5)))
+
+Button4_Click
+Button5_Click
+
+
+TextBox3.Text = Val((Mid(lin, 22, 4)))
+
+IF Mid(lin, 15, 1) = 1 THEN CheckBox1.Value = TRUE
+IF Mid(lin, 15, 1) = 0 THEN CheckBox1.Value = FALSE
+
+IF Mid(lin, 16, 1) = 1 THEN Button9_Click
+IF Mid(lin, 16, 1) = 0 THEN Button8_Click
+
+
+
+IF Mid(lin, 17, 1) = 1 THEN CheckBox2.Value = TRUE
+IF Mid(lin, 17, 1) = 0 THEN CheckBox2.Value = FALSE
+
+IF Mid(lin, 18, 1) = 1 THEN Button11_Click
+IF Mid(lin, 18, 1) = 0 THEN Button10_Click
+
+
+IF Mid(lin, 19, 1) = 1 THEN CheckBox3.Value = TRUE
+IF Mid(lin, 19, 1) = 0 THEN CheckBox3.Value = FALSE
+
+IF Mid(lin, 20, 1) = 1 THEN Button13_Click
+IF Mid(lin, 20, 1) = 0 THEN Button12_Click
+
+ 
+CheckBox4.Value = TRUE
+Step_WDT = TRUE
+Timer1.Enabled = TRUE
+WHILE Step_WDT = TRUE
+WAIT 
+WEND  
+ENDIF 
+ENDIF 
+        NEXT
+
+END
+
+PUBLIC SUB TextBox5_KeyPress()
+
+  
+
+END
+
+PUBLIC SUB Timer2_Timer()
+
+TextBox13.Text = joy_bt_up
+TextBox14.Text = joy_bt_down
+
+
+
+  TextBox11.Text = joy_x
+  TextBox12.Text = joy_y
+  
+IF joy_y < 0 THEN 
+ Button12_Click
+ CheckBox3.Value = TRUE
+  TextBox3.text = 1
+''  CheckBox4.Value = TRUE
+''Timer1.Enabled = TRUE
+ENDIF 
+
+IF joy_y > 0 THEN 
+ Button13_Click 
+ CheckBox3.Value = TRUE
+  TextBox3.text = 1
+''  CheckBox4.Value = TRUE
+''Timer1.Enabled = TRUE
+ENDIF 
+  
+IF joy_x < 0 THEN 
+ Button10_Click
+ CheckBox2.Value = TRUE
+  TextBox3.text = 1
+''  CheckBox4.Value = TRUE
+''Timer1.Enabled = TRUE
+ENDIF 
+
+IF joy_x > 0 THEN 
+ Button11_Click 
+ CheckBox2.Value = TRUE
+  TextBox3.text = 1
+''  CheckBox4.Value = TRUE
+''Timer1.Enabled = TRUE
+ENDIF 
+
+IF joy_bt_up = 1 THEN 
+ Button8_Click
+ CheckBox1.Value = TRUE
+  TextBox3.text = 1
+''  CheckBox4.Value = TRUE
+''Timer1.Enabled = TRUE
+ENDIF 
+
+IF joy_bt_down = 1 THEN 
+ Button9_Click
+ CheckBox1.Value = TRUE
+  TextBox3.text = 1
+''  CheckBox4.Value = TRUE
+''Timer1.Enabled = TRUE
+ENDIF 
+
+IF joy_bt_up = 0 AND IF joy_bt_down = 0 THEN CheckBox1.Value = FALSE
+
+
+
+IF joy_x = 0 THEN CheckBox2.Value = FALSE
+IF joy_y = 0 THEN CheckBox3.Value = FALSE
+
+IF joy_x = 0 AND joy_y = 0 AND joy_bt_down = 0 AND joy_bt_up = 0 THEN Button6_Click
+
+' joy_x = 0
+'joy_y = 0
+
+
+END
+
+PUBLIC SUB Button15_Click()
+
+  Timer2.Enabled = TRUE
+
+END
+
+PUBLIC SUB Button16_Click()
+
+  Timer2.Enabled = FALSE
+
+END
+
+PUBLIC SUB Button17_Click()
+
+  WRITE #SerialPort1, Chr$(112)
+
+END
+
+PUBLIC SUB Button18_Click()
+
+  WRITE #SerialPort1, Chr$(113)
+
+END
+
+PUBLIC SUB Button19_Click()
+
+  WRITE #SerialPort1, Chr$(114)
+
+END
+
+PUBLIC SUB Button20_Click()
+
+  WRITE #SerialPort1, Chr$(115)
+
+END
+
+PUBLIC SUB Button21_Click()
+
+  WRITE #SerialPort1, Chr$(116)
+
+END
