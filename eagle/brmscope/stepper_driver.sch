@@ -11344,6 +11344,10 @@ Source: www.kingbright.com</description>
 <pinref part="R1" gate="G$1" pin="1"/>
 <pinref part="IC4" gate="G$1" pin="PC0(ADC0)"/>
 <wire x1="-40.64" y1="40.64" x2="-43.18" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="IC4" gate="G$1" pin="PD2(INT0)"/>
+<wire x1="-43.18" y1="12.7" x2="-40.64" y2="12.7" width="0.1524" layer="91"/>
+<wire x1="-40.64" y1="12.7" x2="-40.64" y2="40.64" width="0.1524" layer="91"/>
+<junction x="-40.64" y="40.64"/>
 </segment>
 </net>
 <net name="N$5" class="0">
