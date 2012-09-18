@@ -11101,10 +11101,15 @@ Source: www.kingbright.com</description>
 <net name="N$13" class="0">
 <segment>
 <pinref part="IC4" gate="G$1" pin="ADC7"/>
-<wire x1="-43.18" y1="22.86" x2="10.16" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="-43.18" y1="22.86" x2="-33.02" y2="22.86" width="0.1524" layer="91"/>
 <pinref part="IC2" gate="A" pin="I1"/>
+<wire x1="-33.02" y1="22.86" x2="10.16" y2="22.86" width="0.1524" layer="91"/>
 <wire x1="10.16" y1="22.86" x2="10.16" y2="20.32" width="0.1524" layer="91"/>
 <wire x1="10.16" y1="20.32" x2="12.7" y2="20.32" width="0.1524" layer="91"/>
+<pinref part="IC4" gate="G$1" pin="PD4(XCK/T0)"/>
+<wire x1="-43.18" y1="7.62" x2="-33.02" y2="7.62" width="0.1524" layer="91"/>
+<wire x1="-33.02" y1="7.62" x2="-33.02" y2="22.86" width="0.1524" layer="91"/>
+<junction x="-33.02" y="22.86"/>
 </segment>
 </net>
 <net name="N$3" class="0">
@@ -11315,10 +11320,15 @@ Source: www.kingbright.com</description>
 <net name="N$12" class="0">
 <segment>
 <pinref part="IC4" gate="G$1" pin="ADC6"/>
-<wire x1="-43.18" y1="25.4" x2="5.08" y2="25.4" width="0.1524" layer="91"/>
+<wire x1="-43.18" y1="25.4" x2="-35.56" y2="25.4" width="0.1524" layer="91"/>
 <pinref part="IC2" gate="A" pin="I2"/>
+<wire x1="-35.56" y1="25.4" x2="5.08" y2="25.4" width="0.1524" layer="91"/>
 <wire x1="5.08" y1="25.4" x2="5.08" y2="12.7" width="0.1524" layer="91"/>
 <wire x1="5.08" y1="12.7" x2="12.7" y2="12.7" width="0.1524" layer="91"/>
+<pinref part="IC4" gate="G$1" pin="PD3(INT1)"/>
+<wire x1="-43.18" y1="10.16" x2="-35.56" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="-35.56" y1="10.16" x2="-35.56" y2="25.4" width="0.1524" layer="91"/>
+<junction x="-35.56" y="25.4"/>
 </segment>
 </net>
 <net name="N$37" class="0">
